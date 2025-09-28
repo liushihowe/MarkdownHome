@@ -37,6 +37,14 @@ plugins:
 
 google_analytics: G-PCW3KNCFEN
 
+# UI toggles
+# Set to false to hide the global header and footer (still can override per-page if needed).
+show_header_footer: false
+
+# Home page toggles
+# Set to false to hide the posts list ("Posts" heading & RSS link) on the home page.
+show_home_posts: false
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

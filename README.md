@@ -21,10 +21,7 @@
 
 ### 📁 `_layouts/`
 
-存放页面布局文件，定义了页面的整体结构。
-
-- **`default.html`**  
-  默认布局文件，包含了 `<head>` 和 `<body>` 的基本结构。
+- **可控页眉页脚显示**：在 `_config.yml` 中通过 `show_header_footer: true|false` 控制是否渲染全局 Header / Footer（默认显示）。
 
 ---
 
@@ -45,13 +42,12 @@
 
 ### 📁 `assets/`
 
-存放静态资源文件，如 CSS、JS 和图片。
-
 - **`assets/css/override.css`**  
+
   自定义的样式文件，用于覆盖默认主题的样式。
 - **`assets/icons/`**  
-  存放站点的图标文件（如 `favicon.ico`）。
 
+  存放站点的图标文件（如 `favicon.ico`）。
 ---
 
 ### 📁 `_posts/`
@@ -61,8 +57,6 @@
 ---
 
 ### 📁 `_site/`
-
-Jekyll 生成的静态文件目录，通常不需要手动修改。**注意：此目录不会被推送到 Git 仓库中（已在 `.gitignore` 中忽略）。**
 
 ---
 

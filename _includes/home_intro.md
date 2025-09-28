@@ -1,12 +1,4 @@
----
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
-layout: home
-title: 欢迎
----
-
-## 欢迎来到我的博客
+# 欢迎来到我的博客
 
 这里将记录：
 
@@ -22,6 +14,6 @@ title: 欢迎
 | 产品 | 想法、体验、复盘 |
 | 随笔 | 生活点滴、思考随记 |
 
-> 提示：这是首页的自定义介绍内容，你可以直接编辑 `index.markdown` 来更新它（已取消单独 include 文件）。
+> 提示：这是首页的自定义介绍内容，你可以修改 `_includes/home_intro.md` 来更新它。
 
 如果你是第一次搭建 Jekyll，可参考 `README.md` 中的使用说明。祝写作愉快！
