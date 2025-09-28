@@ -3,25 +3,33 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-title: 欢迎
+title: Welcome
 ---
 
-## 欢迎来到我的博客
+## Welcome to my blog
 
-这里将记录：
+This site will contain:
 
-- 学习笔记与技术文章
-- 折腾项目的过程与踩坑记录
-- 读书 / 思考 / 随笔
+- Learning notes and technical articles
+- Project experiments and troubleshooting notes
+- Reading notes, thoughts and essays
 
-## 快速导航
+## Quick navigation
 
-| 分类 | 说明 |
+| Section | Description |
 | ---- | ---- |
-| 技术 | 编程、工具链、源码阅读笔记 |
-| 产品 | 想法、体验、复盘 |
-| 随笔 | 生活点滴、思考随记 |
+| Tech | Programming, toolchain, source-reading notes |
+| Product | Ideas, experience, retrospectives |
+| Misc | Life snippets, thoughts |
 
-> 提示：这是首页的自定义介绍内容，你可以直接编辑 `index.markdown` 来更新它（已取消单独 include 文件）。
+> Tip: This is a custom intro for the home page. Edit `index.markdown` to update it.
 
-如果你是第一次搭建 Jekyll，可参考 `README.md` 中的使用说明。祝写作愉快！
+If you're new to Jekyll, see `README.md` for setup instructions.
+
+---
+
+## 🚀 Quick links
+
+- About: [About me]({{ "/about/" | relative_url }}){:target="_blank" rel="noopener"}
+- RSS: [Feed]({{ "/feed.xml" | relative_url }}){:target="_blank" rel="noopener"}
+- All posts: [Posts archive]({{ "/posts/" | relative_url }}){:target="_blank" rel="noopener"}
