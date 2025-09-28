@@ -1,0 +1,69 @@
+/* !
+  override.css
+  说明: 本文件用于覆盖主题（minima）的部分样式。
+  建议：如果要做大量样式修改，可在此文件添加或移动规则；小修改优先在此处调整。
+*/
+
+/* 文章分隔线间距 */
+hr {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+/* 帖子导航（上一篇/下一篇）样式 */
+.post_navi {
+  display: flex;
+}
+
+.post_navi-label {
+  font-size: 0.8em;
+  opacity: 0.5;
+}
+
+.post_navi .post_navi-item {
+  padding: 0 2.2em;
+  width: 50%;
+  position: relative;
+  color: inherit !important;
+}
+
+.post_navi .nav_prev {
+  text-align: left;
+}
+
+.post_navi .nav_next {
+  text-align: right;
+}
+
+.post_navi .nav_prev .post_navi-arrow {
+  left: 0;
+}
+
+.post_navi .nav_next .post_navi-arrow {
+  right: 0;
+}
+
+.post_navi .post_navi-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5em;
+  opacity: 0.3;
+}
+
+/* ! 隐藏顶部站点栏（minima 的 header 区域） */
+.site-header {
+  display: none !important;
+}
+
+/* ! 如果还想隐藏页脚，也可以打开下面的注释 */
+.site-footer {
+  display: none !important; 
+}
+
+/* 隐藏文章内部的标题区（可选，已注释） */
+/*
+.post-header {
+  display: none !important;
+}
+*/
