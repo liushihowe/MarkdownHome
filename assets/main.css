@@ -119,18 +119,18 @@
   /* === 间距系统 === */
   --space-xs: 8px;
   --space-sm: 16px;
-  --space-md: 24px;      /* 段落间距（增加） */
-  --space-lg: 30px;
-  --space-xl: 48px;
-  --space-2xl: 56px;     /* 大区块间距（增加） */
+  --space-md: 32px;      /* 段落间距（增加到 32px） */
+  --space-lg: 40px;      /* 列表等元素间距（增加） */
+  --space-xl: 56px;      /* 代码块、表格间距（增加） */
+  --space-2xl: 64px;     /* 大区块间距（增加） */
   --space-title-meta: 12px;  /* 标题与元信息间距（减少使其更紧凑） */
   --space-code-block: 32px;  /* 代码块上下间距（增加） */
-  --space-table-cell-v: 12px; /* 表格单元格垂直内边距 */
-  --space-table-cell-h: 16px; /* 表格单元格水平内边距 */
+  --space-table-cell-v: 14px; /* 表格单元格垂直内边距（增加） */
+  --space-table-cell-h: 18px; /* 表格单元格水平内边距（增加） */
   
   /* 标题专用间距（上大下小原则） */
-  --space-heading-top: 2em;    /* 标题上间距 */
-  --space-heading-bottom: 0.5em; /* 标题下间距 */
+  --space-heading-top: 2.5em;    /* 标题上间距（增加） */
+  --space-heading-bottom: 0.8em; /* 标题下间距（增加） */
   
   /* === 边框宽度 === */
   --border-thin: 1px;
@@ -186,13 +186,13 @@ main { display:block; }
 /* 03. 文本元素 */
 ul, ol { margin-left:var(--space-lg); }
 li > ul, li > ol { margin-bottom:0; }
-li { margin-bottom:var(--space-xs); line-height:var(--lh-content); }
+li { margin-bottom:12px; line-height:var(--lh-content); }
 blockquote { 
   color:var(--color-blockquote); 
   background:var(--color-blockquote-bg);
   border-left:var(--border-medium) solid var(--color-blockquote-border); 
-  padding:var(--space-sm) var(--space-md);
-  margin:var(--space-lg) 0;
+  padding:20px 24px;
+  margin:var(--space-xl) 0;
   border-radius:0 var(--radius-sm) var(--radius-sm) 0;
   font-size:var(--fs-sm); 
   letter-spacing:var(--ls-normal); 
