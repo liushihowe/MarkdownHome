@@ -1,73 +1,151 @@
-/* Extracted from compiled main.css, removed source map comments; ready to use */
+/* ========================================================================
+   main.css (refactored)
+   结构与说明：
+   01. 字体与变量
+   02. 基础 Reset & 排版基础
+   03. 文本元素（段落/列表/引用）
+   04. 链接样式
+   05. 媒体与图像
+   06. 通用布局容器
+   07. 表格
+   08. 站点结构（header / nav / footer / page wrapper）
+   09. 文章与列表（post/page headings, meta, list）
+   10. 代码高亮（Rouge tokens）
+   11. 标题等级统一（自定义变量映射）
+   12. 首页特殊标题处理
+   13. 等宽字体 & 行高优化
+   14. 辅助工具类
+   ------------------------------------------------------------------------
+   维护说明：新增模块请在末尾添加，并更新目录编号；删除样式前请确认无模板依赖。
+   ======================================================================== */
 @charset "UTF-8";
-/** Reset */
+
+/* 01. 字体与变量 (自定义可扩展) */
+:root {
+  --fs-xxl: 40px; /* 主标题，文章 / 页面 / 首页 */
+  --fs-xl: 32px;  /* 区块 / 列表标题 */
+  --fs-lg: 24px;  /* 列表项标题 / 正文副标题 */
+  --fs-md: 20px;  /* 次级标题 */
+  --fs-sm: 16px;  /* 正文 / 表格文本 */
+  /* 主体中英文无衬线字体栈（按优先级排列，可在需要时自行裁剪） */
+  /* 将 Noto 系列放在最前以优先使用（如果用户系统已安装对应字体） */
+  --font-sans: "Noto Sans", "Noto Sans CJK SC", "Noto Sans SC", "Noto Sans JP", "Noto Sans TC",
+               "Source Han Sans SC", "Source Han Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+               -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial,
+               "WenQuanYi Micro Hei", "Liberation Sans",
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* === 新调色板（柔和现代浅色） === */
+  --color-text: #1d1f23;
+  --color-text-light: #5b6069;
+  --color-border: #e3e6eb;
+  --color-border-soft: #f0f2f5;
+  --color-accent: #2563eb;         /* 主超链接 / 强调 */
+  --color-accent-hover: #1e3a8a;    /* 悬停更深 */
+  --color-accent-bg: #e8f1ff;       /* 按钮 / 高亮背景可用 */
+  --color-bg: #fafbfc;              /* 页面背景 */
+  --color-surface: #ffffff;         /* 代码块 / 表格 / 卡片 */
+  --color-surface-alt: #f7f9fb;     /* 交替行 / 次级背景 */
+  --color-code-bg: #f5f7fa;         /* 代码整体背景 */
+  --color-inline-code-bg: #eef2f6;  /* 行内代码背景（覆盖之前默认） */
+  --color-inline-code-border: #d5dbe3; /* 行内代码边框 */
+  --color-blockquote: #5f6b7a;      /* 引用文字颜色 */
+  --shadow-soft: 0 1px 2px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.04);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --transition-fast: .18s cubic-bezier(.4,0,.2,1);
+  /* 语法高亮色（基于改良 One Light 风格） */
+  --code-comment: #6a737d;
+  --code-keyword: #0550ae;
+  --code-operator: #374151;
+  --code-string: #0a7c4a;
+  --code-number: #b14d0b;
+  --code-function: #7d2dd0;
+  --code-class: #953800;
+  --code-constant: #b32d3c;
+  --code-variable: #0d6193;
+  --code-attr: #8247b8;
+  --code-builtin: #ae3ec9;
+  --code-deleted-bg: #ffeaea;
+  --code-added-bg: #e5ffef;
+  --code-highlight-line: #fff9d6;
+  /* 标题与日期间距 */
+  --space-title-meta: 16px;
+  /* 块级代码上下外边距 */
+  --space-code-block: 28px;
+}
+@media screen and (max-width:800px){
+  :root { --fs-xxl:34px; --fs-xl:28px; --fs-lg:22px; --fs-md:18px; --fs-sm:16px; }
+}
+
+/* 02. Reset & 基础排版 */
 body, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, hr,
 dl, dd, ol, ul, figure { margin:0; padding:0; }
+body { font-family:var(--font-sans); font-weight:400; font-size:16px; line-height:1.5; color:var(--color-text); background:var(--color-bg); -webkit-text-size-adjust:100%; font-feature-settings:"kern" 1; font-kerning:normal; display:flex; min-height:100vh; flex-direction:column; }
+/* h1, h2, h3, h4, h5, h6 { font-weight:400; margin-bottom:32px; } */
 
-/** Base typography */
-body { font:400 16px/1.5 -apple-system, BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; color:#111; background-color:#fdfdfd; -webkit-text-size-adjust:100%; -webkit-font-feature-settings:"kern" 1; -moz-font-feature-settings:"kern" 1; -o-font-feature-settings:"kern" 1; font-feature-settings:"kern" 1; font-kerning:normal; display:flex; min-height:100vh; flex-direction:column; }
+h1 { font-weight:600; }
+h2, h3 { font-weight:500; }
+.post-meta { font-weight:300; color: var(--color-text-light); }
+strong { font-weight:600; }
 
-h1, h2, h3, h4, h5, h6,
-p, blockquote, pre,
-ul, ol, dl, figure,
-.highlight { margin-bottom:15px; }
-
+p, blockquote, pre, ul, ol, dl, figure { margin-bottom:20px; }
+hr { border:0; border-top:1px solid var(--color-border); margin:48px 0; height:0; }
+.section { margin-bottom:48px; }
 main { display:block; }
+
+/* 03. 文本元素 */
+ul, ol { margin-left:30px; }
+li > ul, li > ol { margin-bottom:0; }
+blockquote { color:var(--color-blockquote); border-left:4px solid var(--color-border); padding-left:15px; font-size:18px; letter-spacing:-1px; font-style:italic; }
+blockquote > :last-child { margin-bottom:0; }
+
+/* 04. 链接 */
+a { color:var(--color-accent); text-decoration:none; }
+a:visited { color:var(--color-accent); }
+a:hover { color:var(--color-accent-hover); text-decoration:underline; }
+
+/* 05. 媒体与图像 */
 img { max-width:100%; vertical-align:middle; }
 figure>img { display:block; }
 figcaption { font-size:14px; }
-ul, ol { margin-left:30px; }
-li > ul, li > ol { margin-bottom:0; }
-h1, h2, h3, h4, h5, h6 { font-weight:400; }
 
-a { color:#2a7ae2; text-decoration:none; }
-a:visited { color: rgb(22.9483471074, 86.2541322314, 168.5516528926); }
-a:hover { color:#111; text-decoration:underline; }
-.social-media-list a:hover { text-decoration:none; }
-.social-media-list a:hover .username { text-decoration:underline; }
-
-blockquote { color:#828282; border-left:4px solid #e8e8e8; padding-left:15px; font-size:18px; letter-spacing:-1px; font-style:italic; }
-blockquote > :last-child { margin-bottom:0; }
-
-pre, code { font-size:15px; border:1px solid #e8e8e8; border-radius:3px; background-color:#eef; }
-code { padding:1px 5px; }
-pre { padding:8px 12px; overflow-x:auto; }
-pre > code { border:0; padding-right:0; padding-left:0; }
-
+/* 06. 布局容器 */
 .wrapper { max-width:calc(800px - 30px * 2); margin:0 auto; padding:0 30px; }
-@media screen and (max-width:800px){ .wrapper { max-width:calc(800px - (30px)); padding-right:15px; padding-left:15px; } }
-
+@media screen and (max-width:800px){ .wrapper { max-width:calc(800px - 30px); padding-right:15px; padding-left:15px; } }
 .footer-col-wrapper:after, .wrapper:after { content:""; display:table; clear:both; }
 
-.svg-icon { width:16px; height:16px; display:inline-block; fill:#828282; padding-right:5px; vertical-align:text-top; }
-.social-media-list li+li { padding-top:5px; }
+/* 07. 表格 */
+table { margin:32px 0; width:100%; border-collapse:separate; border-spacing:0; font-size:var(--fs-sm); background:var(--color-surface); text-align:left; box-shadow:var(--shadow-soft); border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden; }
+table th, table td { padding:12px 16px; border-bottom:1px solid var(--color-border-soft); vertical-align:top; }
+table th { background:linear-gradient(#f6f8fa,#eef2f6); font-weight:600; color:#2d3748; }
+table tr:last-child td { border-bottom:none; }
+table tr:nth-child(even) td { background:var(--color-surface-alt); }
+table tr:hover td { background:#eaf2fc; }
+table code { background:#f5f5f5; }
+table, table th, table td { word-break:break-word; }
+.table-wrapper { overflow-x:auto; margin:32px 0; }
 
-table { margin-bottom:30px; width:100%; text-align:left; color:rgb(62.9,62.9,62.9); border-collapse:collapse; border:1px solid #e8e8e8; }
-table tr:nth-child(even){ background-color:rgb(247.3,247.3,247.3); }
-table th, table td { padding: 10px 15px; }
-table th { background-color:rgb(239.65,239.65,239.65); border:1px solid rgb(221.8,221.8,221.8); border-bottom-color:rgb(201.4,201.4,201.4); }
-table td { border:1px solid #e8e8e8; }
-
-.site-header { border-top:5px solid rgb(66.25,66.25,66.25); border-bottom:1px solid #e8e8e8; min-height:55.95px; position:relative; }
+/* 08. 站点结构（Header / Nav / Footer） */
+.site-header { border-top:5px solid #424242; border-bottom:1px solid var(--color-border); min-height:56px; position:relative; }
 .site-title { font-size:26px; font-weight:300; line-height:54px; letter-spacing:-1px; margin-bottom:0; float:left; }
-.site-title, .site-title:visited { color:rgb(66.25,66.25,66.25); }
+.site-title, .site-title:visited { color:#424242; }
 .site-nav { float:right; line-height:54px; }
-.site-nav .nav-trigger { display:none; }
-.site-nav .menu-icon { display:none; }
+.site-nav .nav-trigger, .site-nav .menu-icon { display:none; }
 .site-nav .page-link { color:#111; line-height:1.5; }
 .site-nav .page-link:not(:last-child){ margin-right:20px; }
-@media screen and (max-width:600px){ .site-nav { position:absolute; top:9px; right:15px; background:#fdfdfd; border:1px solid #e8e8e8; border-radius:5px; text-align:right; }
-  .site-nav label[for=nav-trigger]{ display:block; float:right; width:36px; height:36px; z-index:2; cursor:pointer; }
-  .site-nav .menu-icon{ display:block; float:right; width:36px; height:26px; line-height:0; padding-top:10px; text-align:center; }
-  .site-nav .menu-icon>svg{ fill:rgb(66.25,66.25,66.25); }
+@media screen and (max-width:600px){
+  .site-nav { position:absolute; top:9px; right:15px; background:#fdfdfd; border:1px solid var(--color-border); border-radius:5px; text-align:right; }
+  .site-nav label[for=nav-trigger]{ display:block; float:right; width:36px; height:36px; cursor:pointer; }
+  .site-nav .menu-icon{ display:block; float:right; width:36px; height:26px; padding-top:10px; text-align:center; }
   .site-nav input ~ .trigger{ clear:both; display:none; }
   .site-nav input:checked ~ .trigger{ display:block; padding-bottom:5px; }
   .site-nav .page-link{ display:block; margin-left:20px; padding:5px 10px; }
   .site-nav .page-link:not(:last-child){ margin-right:0; }
 }
-
-.site-footer { border-top:1px solid #e8e8e8; padding:30px 0; }
+.site-footer { border-top:1px solid var(--color-border); padding:30px 0; }
 .footer-heading { font-size:18px; margin-bottom:15px; }
 .contact-list, .social-media-list { list-style:none; margin-left:0; }
 .footer-col-wrapper { font-size:15px; color:#828282; margin-left:-15px; }
@@ -78,80 +156,106 @@ table td { border:1px solid #e8e8e8; }
 @media screen and (max-width:800px){ .footer-col-1, .footer-col-2 { width:calc(50% - 30px / 2); } .footer-col-3 { width:calc(100% - 30px / 2); } }
 @media screen and (max-width:600px){ .footer-col { float:none; width:calc(100% - 30px / 2); } }
 .page-content { padding:30px 0; flex:1; }
-.page-heading { font-size:32px; }
-.post-list-heading { font-size:28px; }
+
+/* 09. 文章与列表 */
 .post-list { margin-left:0; list-style:none; }
-.post-list>li { margin-bottom:30px; }
+.post-list>li { margin-bottom:32px; }
 .post-meta { font-size:14px; color:#828282; }
-.post-link { display:block; font-size:24px; }
-.post-header { margin-bottom:30px; }
-.post-title { font-size:42px; letter-spacing:-1px; line-height:1; }
-@media screen and (max-width:800px){ .post-title { font-size:36px; } }
-.post-content { margin-bottom:30px; }
-.post-content h2 { font-size:32px; }
-@media screen and (max-width:800px){ .post-content h2 { font-size:28px; } }
-.post-content h3 { font-size:26px; }
-@media screen and (max-width:800px){ .post-content h3 { font-size:22px; } }
-.post-content h4 { font-size:20px; }
-@media screen and (max-width:800px){ .post-content h4 { font-size:18px; } }
-.highlight { background:#fff; }
-.highlighter-rouge .highlight { background:#eef; }
-.highlight .c{ color:#998; font-style:italic; }
-.highlight .err{ color:#a61717; background-color:#e3d2d2; }
-.highlight .k{ font-weight:bold; }
-.highlight .o{ font-weight:bold; }
-.highlight .cm{ color:#998; font-style:italic; }
-.highlight .cp{ color:#999; font-weight:bold; }
-.highlight .c1{ color:#998; font-style:italic; }
-.highlight .cs{ color:#999; font-weight:bold; font-style:italic; }
-.highlight .gd{ color:#000; background-color:#fdd; }
-.highlight .gd .x{ color:#000; background-color:#faa; }
-.highlight .ge{ font-style:italic; }
-.highlight .gr{ color:#a00; }
-.highlight .gh{ color:#999; }
-.highlight .gi{ color:#000; background-color:#dfd; }
-.highlight .gi .x{ color:#000; background-color:#afa; }
-.highlight .go{ color:#888; }
-.highlight .gp{ color:#555; }
-.highlight .gs{ font-weight:bold; }
-.highlight .gu{ color:#aaa; }
-.highlight .gt{ color:#a00; }
-.highlight .kc{ font-weight:bold; }
-.highlight .kd{ font-weight:bold; }
-.highlight .kp{ font-weight:bold; }
-.highlight .kr{ font-weight:bold; }
-.highlight .kt{ color:#458; font-weight:bold; }
-.highlight .m{ color:#099; }
-.highlight .s{ color:#d14; }
-.highlight .na{ color:#008080; }
-.highlight .nb{ color:#0086B3; }
-.highlight .nc{ color:#458; font-weight:bold; }
-.highlight .no{ color:#008080; }
-.highlight .ni{ color:#800080; }
-.highlight .ne{ color:#900; font-weight:bold; }
-.highlight .nf{ color:#900; font-weight:bold; }
-.highlight .nn{ color:#555; }
-.highlight .nt{ color:#000080; }
-.highlight .nv{ color:#008080; }
-.highlight .ow{ font-weight:bold; }
-.highlight .w{ color:#bbb; }
-.highlight .mf{ color:#099; }
-.highlight .mh{ color:#099; }
-.highlight .mi{ color:#099; }
-.highlight .mo{ color:#099; }
-.highlight .sb{ color:#d14; }
-.highlight .sc{ color:#d14; }
-.highlight .sd{ color:#d14; }
-.highlight .s2{ color:#d14; }
-.highlight .se{ color:#d14; }
-.highlight .sh{ color:#d14; }
-.highlight .si{ color:#d14; }
-.highlight .sx{ color:#d14; }
-.highlight .sr{ color:#009926; }
-.highlight .s1{ color:#d14; }
-.highlight .ss{ color:#990073; }
-.highlight .bp{ color:#999; }
-.highlight .vc{ color:#008080; }
-.highlight .vg{ color:#008080; }
-.highlight .vi{ color:#008080; }
-.highlight .il{ color:#099; }
+.post-header { margin-bottom:40px; }
+.post-content { margin-bottom:40px; }
+.post-content h2, .post-content h3, .post-content h4 { margin-top:48px; }
+.post-content h2:first-child, .post-content h3:first-child, .post-content h4:first-child { margin-top:0; }
+
+/* 10. Rouge 代码高亮 Token 颜色 */
+/* 结构：
+  <div class="language-xxx highlighter-rouge">
+    <div class="highlight"><pre class="highlight"><code>...</code></pre></div>
+  </div>
+  为避免“双层描边”，将边框/圆角/内边距放到最外层容器 .highlighter-rouge，
+  内部 .highlight 去掉边框，只保留滚动能力。 */
+.highlighter-rouge { background:var(--color-code-bg); padding:16px 18px; border:1px solid var(--color-border); border-radius:var(--radius-md); box-shadow:var(--shadow-soft); margin:var(--space-code-block) 0; }
+
+/* 行内代码块样式 - 小间距 */
+.highlighter-rouge:not(pre) {
+  margin: 2px 0;
+  padding: 2px 6px;
+  display: inline;
+  background:var(--color-inline-code-bg);
+  border:1px solid var(--color-inline-code-border);
+}
+
+/* 确保代码块保持块级显示和大间距 */
+pre.highlighter-rouge,
+div.highlighter-rouge {
+  display: block;
+  margin: var(--space-code-block) 0;
+  padding: 16px 18px;
+}
+
+.highlighter-rouge:first-child { margin-top:0; }
+.highlighter-rouge .highlight { background:transparent; padding:0; border:none; border-radius:0; overflow:auto; line-height:1.5; position:relative; margin:0; }
+.highlight pre { margin:0; background:transparent; padding:0; }
+.highlight code { background:transparent; }
+.highlight .hll { background:var(--code-highlight-line); }
+/* 去除所有粗体，统一权重 400，通过色彩区分语法 */
+.highlight .c, .highlight .cm, .highlight .c1, .highlight .cs { color:var(--code-comment); font-style:italic; }
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kp, .highlight .kr { color:var(--code-keyword); font-weight:400; }
+.highlight .o, .highlight .ow { color:var(--code-operator); font-weight:400; }
+.highlight .kt { color:var(--code-keyword); }
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .s1 { color:var(--code-string); }
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il { color:var(--code-number); }
+.highlight .nf, .highlight .ne { color:var(--code-function); }
+.highlight .nc { color:var(--code-class); }
+.highlight .no, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi { color:var(--code-variable); }
+.highlight .na { color:var(--code-attr); }
+.highlight .nb, .highlight .bp { color:var(--code-builtin); }
+.highlight .nt { color:var(--code-constant); }
+.highlight .nn { color:var(--code-variable); }
+.highlight .w { color:#a0a4ab; }
+.highlight .ss { color:var(--code-string); }
+.highlight .gd { background:var(--code-deleted-bg); }
+.highlight .gi { background:var(--code-added-bg); }
+.highlight .err { color:#b42318; background:#ffe0e0; border-bottom:1px dotted #d33; }
+
+/* 行号可选（预留，不启用） */
+/* .highlight pre { counter-reset: lineno; }
+.highlight pre code { display:block; }
+.highlight pre code > span { display:block; counter-increment: lineno; }
+.highlight pre code > span:before { content: counter(lineno); display:inline-block; width:2.2em; margin-right:12px; text-align:right; color:#9da2a8; } */
+
+/* 11. 标题等级统一映射 */
+.post-title, .page-heading { font-size:var(--fs-xxl); line-height:1.1; letter-spacing:-0.5px; }
+.post-header .post-title { margin-bottom: var(--space-title-meta); }
+.post-list-heading { font-size:var(--fs-xl); }
+.post-link { font-size:var(--fs-lg); display:block; }
+.post-content h2 { font-size:var(--fs-xl); }
+.post-content h3 { font-size:var(--fs-lg); }
+.post-content h4 { font-size:var(--fs-md); }
+
+/* 12. 首页首个 Markdown h1 与主标题对齐 */
+.home > h1:first-of-type { font-size:var(--fs-xxl); line-height:1.1; letter-spacing:-0.5px; }
+.home > h1:first-of-type { margin-bottom: var(--space-title-meta); }
+
+/* 13. 等宽字体 & 行高优化 */
+pre, code, kbd, samp { font-family:var(--font-mono); font-weight:400; }
+.highlight pre, .highlight code { font-family:var(--font-mono); font-weight:400; }
+pre { line-height:1.5; }
+code { line-height:1.35; }
+
+/* 行内代码（使用 Markdown `code`）与代码块区分：仅针对非 <pre> 直接子级的 <code> */
+:not(pre) > code {
+  background:var(--color-inline-code-bg);
+  padding:2px 6px 2px 6px;
+  border:1px solid var(--color-inline-code-border);
+  border-radius:var(--radius-sm);
+  font-size:0.93em;
+  white-space:nowrap;
+  box-shadow:inset 0 1px 0 #ffffff, 0 1px 1px rgba(0,0,0,0.05);
+  position:relative;
+  top:-1px;
+}
+a > code { color:inherit; }
+
+/* 14. 工具类 */
+.content-block { margin-bottom:48px; }
+.table-wrapper { /* 已在表格区声明，重复放置避免被覆盖 */ overflow-x:auto; }

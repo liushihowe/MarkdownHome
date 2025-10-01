@@ -5,9 +5,7 @@
 
   <body>
 
-    {% if site.show_header_footer != false %}
-      {%- include header.html -%}
-    {% endif %}
+    {% comment %} header removed: site uses minimal layout without header include {% endcomment %}
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
@@ -15,9 +13,30 @@
       </div>
     </main>
 
-    {% if site.show_header_footer != false %}
-      {%- include footer.html -%}
-    {% endif %}
+    {% comment %} footer removed: keep site minimal; footer include deleted from includes folder {% endcomment %}
+
+    <!-- Auto-set links to open in a new tab (skip anchors and protocols like mailto/tel/javascript) -->
+    <script>
+      (function(){
+        try {
+          var anchors = document.getElementsByTagName('a');
+          var skipPrefixes = ['#', 'mailto:', 'tel:', 'javascript:'];
+          for (var i = 0; i < anchors.length; i++) {
+            var a = anchors[i];
+            var href = a.getAttribute('href');
+            if (!href) continue;
+            var skip = false;
+            for (var j = 0; j < skipPrefixes.length; j++) {
+              if (href.indexOf(skipPrefixes[j]) === 0) { skip = true; break; }
+            }
+            if (skip) continue;
+            // set to open in new tab and secure
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener noreferrer');
+          }
+        } catch (e) { console.error(e); }
+      })();
+    </script>
 
   </body>
 

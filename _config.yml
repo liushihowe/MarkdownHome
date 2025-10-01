@@ -30,10 +30,13 @@ twitter_username: jekyllrb
 github_username:  jekyll
 
 # Build settings
-# theme: minima
 plugins:
-  - jekyll-feed
+  # - jekyll-feed  # removed to simplify site features
   - jekyll-seo-tag
+
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
 
 google_analytics: G-PCW3KNCFEN
 
@@ -41,9 +44,16 @@ google_analytics: G-PCW3KNCFEN
 # Set to false to hide the global header and footer (still can override per-page if needed).
 show_header_footer: false
 
+# Site-wide date format (e.g. "September 28, 2025")
+date_format: "%Y-%m-%d"
+
 # Home page toggles
 # Set to false to hide the posts list ("Posts" heading & RSS link) on the home page.
 show_home_posts: false
+
+# Font loading toggle
+# Set to true to use locally hosted webfonts declared in assets/fonts/fonts.css
+use_local_fonts: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.

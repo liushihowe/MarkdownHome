@@ -1,0 +1,149 @@
+/* Local webfont declarations.
+   Place your .woff2 files in this folder. Keep only needed weights to reduce size.
+   Recommended subset: Latin + CJK Simplified (自行用字体子集化工具如 glyphhanger / fonttools 缩减).
+
+   How to add a weight:
+   1. Download Noto Sans / Noto Sans SC woff2 (e.g. from Google Fonts or official repo).
+   2. Rename e.g. NotoSansSC-Regular.woff2, NotoSansSC-Bold.woff2.
+   3. Uncomment / add @font-face blocks below and ensure 'src' filenames match.
+   4. Ensure _config.yml has use_local_fonts: true (already set).
+   5. Build site; browser network panel应可看到对应 woff2 成功加载.
+*/
+
+/* Example Regular (已使用 HarmonyOS Sans SC Regular 作为示例) */
+
+/* Thin - 极细 */
+@font-face {
+    font-family: 'HarmonyOS Sans Local';
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url('./HarmonyOS_Sans_Thin.woff2') format('woff2');
+}
+
+/* Light - 细体 */
+@font-face {
+    font-family: 'HarmonyOS Sans Local';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('./HarmonyOS_Sans_Light.woff2') format('woff2');
+}
+
+/* Regular - 常规 */
+@font-face {
+    font-family: 'HarmonyOS Sans Local';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./HarmonyOS_Sans_Regular.woff2') format('woff2');
+}
+
+/* Medium - 中等 */
+@font-face {
+    font-family: 'HarmonyOS Sans Local';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('./HarmonyOS_Sans_Medium.woff2') format('woff2');
+}
+
+/* Bold - 粗体 */
+@font-face {
+    font-family: 'HarmonyOS Sans Local';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('./HarmonyOS_Sans_Bold.woff2') format('woff2');
+}
+
+/* Black - 超粗体 */
+@font-face {
+    font-family: 'HarmonyOS Sans Local';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('./HarmonyOS_Sans_Black.woff2') format('woff2');
+}
+
+/* 如果你还想并列引入其它中文字体（例如备用的 Noto Sans CJK），
+   可以保留第二个 family，例如：
+@font-face {
+  font-family: 'Noto Sans CJK SC Local';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./NotoSansCJKsc-Regular.woff2') format('woff2');
+}
+*/
+
+/* Thin - 极细 */
+@font-face {
+    font-family: 'HarmonyOS Sans SC Local';
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url('./cn/HarmonyOS_Sans_SC_Thin.woff2') format('woff2');
+}
+
+/* Light - 细体 */
+@font-face {
+    font-family: 'HarmonyOS Sans SC Local';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('./cn/HarmonyOS_Sans_SC_Light.woff2') format('woff2');
+}
+
+/* Regular - 常规 */
+@font-face {
+    font-family: 'HarmonyOS Sans SC Local';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./cn/HarmonyOS_Sans_SC_Regular.woff2') format('woff2');
+}
+
+/* Medium - 中等 */
+@font-face {
+    font-family: 'HarmonyOS Sans SC Local';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('./cn/HarmonyOS_Sans_SC_Medium.woff2') format('woff2');
+}
+
+/* Bold - 粗体 */
+@font-face {
+    font-family: 'HarmonyOS Sans SC Local';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('./cn/HarmonyOS_Sans_SC_Bold.woff2') format('woff2');
+}
+
+/* Black - 超粗体 */
+@font-face {
+    font-family: 'HarmonyOS Sans SC Local';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('./cn/HarmonyOS_Sans_SC_Black.woff2') format('woff2');
+}
+
+
+/* Usage override (optional):
+   :root { --font-sans: 'Noto Sans Local', 'Noto Sans CJK SC Local', var(--font-sans); }
+*/
+
+/* 已启用：将 HarmonyOS Sans SC 本地子集字体置于变量栈最前。
+   如果再添加第二个本地字体，把它放在第一个后面即可。 */
+:root {
+   /* 注意：之前写法使用 var(--font-sans) 递归引用自身会导致循环而失效（浏览器忽略该声明，仍沿用原值）。
+       这里改为直接写出完整字体栈，把本地字体放在最前。 */
+   --font-sans: 'HarmonyOS Sans SC Local', 'HarmonyOS Sans Local','Noto Sans', 'Noto Sans CJK SC', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans TC',
+                      'Source Han Sans SC', 'Source Han Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+                      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial,
+                      'WenQuanYi Micro Hei', 'Liberation Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+

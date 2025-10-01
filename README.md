@@ -14,66 +14,14 @@ MarkdownHome is a minimalist Jekyll theme designed for creators. All you need to
 
 ## 🚀 Quick Start
 
-### Step 1: Create Your Repository
+## 🚀 Quick Start (copy & use)
 
-1. Visit [MarkdownHome GitHub Repository](https://github.com/liushihowe/MarkdownHome)
-2. Click "Use this template" → "Create a new repository" in the top-right corner
-3. Name your repository, suggested format: `yourusername.github.io`
-   - Example: `johnsmith.github.io`
+1. Click "Use this template" on GitHub or clone this repository to get started.
+2. Edit `_config.yml` to set `title`, `description`, `url`, and any social links you want to show.
+3. Add or edit pages (root) and posts (`_posts/`).
+4. Commit and push to your repository; enable GitHub Pages in repository Settings to publish the site.
 
-### Step 2: Basic Configuration
-
-Open the `_config.yml` file and modify these basic settings:
-
-```yaml
-# Basic site information
-title: "Your Site Title"
-author: "Your Name"
-description: "Site description"
-baseurl: "" # Keep empty if repository name is username.github.io
-url: "https://yourusername.github.io" # Your website URL
-
-# Social links (optional)
-github_username: your-github-username
-twitter_username: your-twitter-username
-email: your-email@example.com
-```
-
-### Step 3: Add Your Content
-
-#### Create About Page
-
-Create `about.md` in the root directory:
-
-```markdown
----
-layout: page
-title: About Me
----
-
-Write your self-introduction using Markdown here...
-```
-
-#### Write Blog Posts
-
-Create posts in the `_posts/` directory with filename format: `year-month-day-title.md`
-
-```markdown
----
-layout: post
-title: "My First Post"
-date: 2024-01-15
----
-
-Your post content here, written in **Markdown** syntax...
-```
-
-### Step 4: Deploy Your Site
-
-1. Commit your changes to GitHub
-2. Go to repository Settings → Pages
-3. Ensure GitHub Pages source is set to "Deploy from a branch", select `main` or `master` branch
-4. Wait a few minutes, then visit `https://yourusername.github.io` to see your live website!
+This repository is meant to be copied and used as-is. If you want to customize templates or styles, edit files in `_layouts/`, `_includes/`, and `_sass/`.
 
 ## 📁 Project Structure
 
@@ -164,9 +112,9 @@ A: Yes! Create a `CNAME` file in the repository root with your domain name insid
 
 ## 📚 Learning Resources
 
-- [Jekyll Official Documentation](https://jekyllrb.com/){:target="_blank" rel="noopener"}
-- [Markdown Syntax Guide](https://www.markdownguide.org/){:target="_blank" rel="noopener"}
-- [GitHub Pages Help](https://docs.github.com/categories/github-pages-basics/){:target="_blank" rel="noopener"}
+- [Jekyll Official Documentation](https://jekyllrb.com/)
+- [Markdown Syntax Guide](https://www.markdownguide.org/)
+- [GitHub Pages Help](https://docs.github.com/categories/github-pages-basics/)
 
 ## 🤝 Contributing
 
@@ -180,4 +128,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Start your creation journey!** 🎉
 
-If you have any questions, check [GitHub Issues](https://github.com/liushihowe/MarkdownHome/issues){:target="_blank" rel="noopener"} or create a new Issue.
+If you have any questions, check [GitHub Issues](https://github.com/liushihowe/MarkdownHome/issues) or create a new Issue.

@@ -3,8 +3,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {%- seo -%}
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/icons/Minimalist Website Icons.ico' | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-  {%- feed_meta -%}
+  {%- if site.use_local_fonts -%}
+  <link rel="stylesheet" href="{{ "/assets/fonts/fonts.css" | relative_url }}">
+  {%- endif -%}
+  {%- comment %} jekyll-feed removed: feed_meta removed to simplify features. Add back if RSS is needed. {% endcomment %}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
