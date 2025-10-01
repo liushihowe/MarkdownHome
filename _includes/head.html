@@ -3,7 +3,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {%- seo -%}
-  <link rel="icon" type="image/x-icon" href="{{ '/assets/icons/Minimalist Website Icons.ico' | relative_url }}">
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/icons/Minimalist Website Icons in Color.ico' | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   {%- if site.use_local_fonts -%}
   <link rel="stylesheet" href="{{ "/assets/fonts/fonts.css" | relative_url }}">
@@ -12,4 +12,186 @@
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
+
+  <!-- MathJax 数学公式支持 -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        enableMenu: false            // 禁用默认右键菜单
+      },
+      chtml: {
+        scale: 1.0,
+        displayAlign: 'center',
+        displayIndent: '0'
+      },
+      startup: {
+        ready: () => {
+          MathJax.startup.defaultReady();
+          MathJax.startup.promise.then(() => {
+            // 为所有公式添加点击放大和复制功能
+            document.querySelectorAll('mjx-container').forEach(container => {
+              container.style.cursor = 'pointer';
+              container.addEventListener('click', function(e) {
+                showFormulaModal(this);
+              });
+            });
+          });
+        }
+      }
+    };
+
+    // 显示公式放大弹窗
+    function showFormulaModal(formulaElement) {
+      // 创建遮罩层
+      const overlay = document.createElement('div');
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        cursor: pointer;
+      `;
+
+      // 创建内容容器（使用 --radius-md: 8px）
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 8px;
+        border: 1px solid #e3e6eb;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+        max-width: 90%;
+        max-height: 90%;
+        overflow: auto;
+        position: relative;
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      `;
+
+      // 创建公式容器（需要 relative 定位来放置复制按钮）
+      const formulaContainer = document.createElement('div');
+      formulaContainer.style.cssText = `
+        position: relative;
+        width: 100%;
+        background: #f5f7fa;
+        padding: 24px;
+        padding-top: 48px;
+        border: 1px solid #e3e6eb;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.04);
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+      `;
+
+      // 克隆公式并放大
+      const formulaClone = formulaElement.cloneNode(true);
+      formulaClone.style.cssText = `
+        font-size: 200%;
+      `;
+
+      // 获取公式的 LaTeX 源码
+      const latex = formulaElement.getAttribute('data-mjx-texclass') 
+        ? getLatexFromElement(formulaElement)
+        : formulaElement.textContent;
+
+      // 创建复制按钮（图标按钮，放在右上角）
+      const copyBtn = document.createElement('button');
+      copyBtn.textContent = '📋';
+      copyBtn.title = '复制公式';
+      copyBtn.style.cssText = `
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #eef2f6;
+        color: #1d1f23;
+        border: 1px solid #d5dbe3;
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 1px rgba(0, 0, 0, 0.05);
+        line-height: 1;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `;
+      copyBtn.onmouseover = () => {
+        copyBtn.style.background = '#f0f2f5';
+        copyBtn.style.borderColor = '#e3e6eb';
+        copyBtn.style.transform = 'scale(1.1)';
+      };
+      copyBtn.onmouseout = () => {
+        copyBtn.style.background = '#eef2f6';
+        copyBtn.style.borderColor = '#d5dbe3';
+        copyBtn.style.transform = 'scale(1)';
+      };
+      copyBtn.onclick = (e) => {
+        e.stopPropagation();
+        copyToClipboard(formulaElement.textContent);
+        copyBtn.textContent = '✅';
+        setTimeout(() => {
+          copyBtn.textContent = '📋';
+        }, 2000);
+      };
+
+      // 组装弹窗
+      formulaContainer.appendChild(copyBtn);
+      formulaContainer.appendChild(formulaClone);
+      modal.appendChild(formulaContainer);
+      overlay.appendChild(modal);
+
+      // 点击遮罩关闭
+      overlay.onclick = (e) => {
+        if (e.target === overlay) {
+          document.body.removeChild(overlay);
+        }
+      };
+
+      // 阻止弹窗内部点击冒泡
+      modal.onclick = (e) => e.stopPropagation();
+
+      document.body.appendChild(overlay);
+    }
+
+    // 复制到剪贴板
+    function copyToClipboard(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+    }
+
+    // 提取 LaTeX 源码（尝试）
+    function getLatexFromElement(element) {
+      return element.textContent;
+    }
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  </script>
+  
 </head>

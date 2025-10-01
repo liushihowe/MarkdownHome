@@ -37,6 +37,9 @@ plugins:
 highlighter: rouge
 kramdown:
   syntax_highlighter: rouge
+  input: GFM
+  hard_wrap: false
+  math_engine: mathjax
 
 google_analytics: G-PCW3KNCFEN
 

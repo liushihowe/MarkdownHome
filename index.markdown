@@ -3,11 +3,9 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-# title: "Welcome to MarkdownHome"
+title: "Welcome to MarkdownHome"
 date: 2025-09-28 13:00:00 +0800
 ---
-
-# Welcome to MarkdownHome
 
 This site is powered by MarkdownHome — a minimalist Jekyll starter theme that lets you build a personal website and blog using only Markdown. The homepage below highlights the project's features and gives quick steps to get started.
 
@@ -15,7 +13,6 @@ This site is powered by MarkdownHome — a minimalist Jekyll starter theme that 
 
 - Ready-to-use Jekyll starter with sensible defaults
 - Write content in Markdown; the theme handles layout and styling
-- Minimal, responsive design powered by the Minima-based styles
 
 ## 🚀 Quick start (copy & use)
 

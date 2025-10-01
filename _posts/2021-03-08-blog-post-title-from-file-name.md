@@ -1,14 +1,7 @@
 ---
+layout: post
 title: "Blog Post Title From First Header"
 date: 2021-03-08
-author: "Ssomeone"
-categories: [技术, 教程]
-tags: [Jekyll, GitHub Pages]
-description: "这是一个演示创建笔记的示例"
-excerpt: "学习如何在 Jekyll 博客中添加代码高亮和格式化内容"
-image: "/assets/images/default-post.jpg"  # 可选：文章封面图
-# toc: true  # 可选：显示目录
-comments: true  # 可选：允许评论
 ---
 
 <!--
@@ -29,8 +22,6 @@ comments: true  # 可选：允许评论
 ---
 
 ### 支持语言高亮
-
----
 
 ### Python 示例
 
